@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+// const auth = require("../middleware/auth");
 
 const {
   createTask,
@@ -10,19 +10,27 @@ const {
   markTaskComplete,
 } = require("../controllers/taskController");
 
-// CREATE TASK
-router.post("/", auth, createTask);
+const { protect } = require('../middleware/auth');
 
-// GET TASKS BY PROJECT
-router.get("/project/:projectId", auth, getTasksByProject);
+// // CREATE TASK
+// router.post("/", auth, createTask);
 
-// UPDATE TASK
-router.put("/:id", auth, updateTask);
+// // GET TASKS BY PROJECT
+// router.get("/project/:projectId", auth, getTasksByProject);
 
-// DELETE TASK
-router.delete("/:id", auth, deleteTask);
+// // UPDATE TASK
+// router.put("/:id", auth, updateTask);
 
-// MARK COMPLETE
-router.patch("/:id/complete", auth, markTaskComplete);
+// // DELETE TASK
+// router.delete("/:id", auth, deleteTask);
+
+// // MARK COMPLETE
+// router.patch("/:id/complete", auth, markTaskComplete);
+
+router.post("/", protect, createTask);
+router.get("/project/:projectId", protect, getTasksByProject);
+router.put("/:id", protect, updateTask);
+router.delete("/:id", protect, deleteTask);
+router.patch("/:id/complete", protect, markTaskComplete)
 
 module.exports = router;
