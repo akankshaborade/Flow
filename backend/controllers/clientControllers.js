@@ -20,4 +20,28 @@ exports.getClients = async (req, res) => {
   }
 };
 
-// Add your Update and Delete functions here too!
+// Update a client
+exports.updateClient = async (req, res) => {
+  try {
+    const client = await Client.findOneAndUpdate(
+      { _id: req.params.id, user: req.user.id }, // Must match ID AND User
+      req.body,
+      { new: true }
+    );
+    if (!client) return res.status(404).json({ message: "Client not found" });
+    res.status(200).json(client);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Delete a client
+exports.deleteClient = async (req, res) => {
+  try {
+    const client = await Client.findOneAndDelete({ _id: req.params.id, user: req.user.id });
+    if (!client) return res.status(404).json({ message: "Client not found" });
+    res.json({ message: "Client deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
