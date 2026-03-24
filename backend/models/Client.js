@@ -1,29 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const clientSchema = new mongoose.Schema({
-  // Each client belongs to a specific user
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  name: {
-    type: String,
-    required: [true, 'Client name is required'],
-    trim: true,
-  },
-  email: {
-    type: String,
-    trim: true,
-    lowercase: true,
-  },
-  company: {
-    type: String,
-    trim: true,
-  },
-  notes: {
-    type: String,
-  },
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  notes: { type: String },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true } // Link to the user!
 }, { timestamps: true });
 
-module.exports = mongoose.model('Client', clientSchema);
+module.exports = mongoose.model("Client", clientSchema);

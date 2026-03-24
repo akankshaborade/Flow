@@ -1,19 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {
-  createClient,
-  getClients,
-  getClientById,
-  updateClient,
-  deleteClient,
-} = require('../controllers/clientController');
-const { protect } = require('../middleware/auth');
+const { createClient,
+     getClients,
+     updateClient, 
+     deleteClient } = require("../controllers/clientControllers");
+const { protect } = require("../middleware/auth"); 
 
-// All routes below are protected
-router.post('/', protect, createClient);
-router.get('/', protect, getClients);
-router.get('/:id', protect, getClientById);
-router.put('/:id', protect, updateClient);
-router.delete('/:id', protect, deleteClient);
+router.route("/")
+  .post(protect, createClient)
+  .get(protect, getClients);
 
-module.exports = router;
+  router.route("/:id")
+  .put(protect, updateClient)
+  .delete(protect, deleteClient);
+  
+module.exports = router; 
