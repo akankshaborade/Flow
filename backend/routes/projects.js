@@ -10,11 +10,15 @@ const {
 } = require('../controllers/projectController');
 const { protect } = require('../middleware/auth');
 
-router.post('/', protect, createProject);
-router.get('/', protect, getProjects);
+router.route('/')
+  .post(protect, createProject)
+  .get(protect, getProjects);
+
 router.get('/client/:clientId', protect, getProjectsByClient);
-router.get('/:id', protect, getProjectById);
-router.put('/:id', protect, updateProject);
-router.delete('/:id', protect, deleteProject);
+
+router.route('/:id')
+  .get(protect, getProjectById)
+  .put(protect, updateProject)
+  .delete(protect, deleteProject);
 
 module.exports = router;

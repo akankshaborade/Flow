@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
-  // Links project to the logged-in user
+  // Project belongs to a user
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  // Links project to a client
+  // Project is linked to a client
   client: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Client',
@@ -31,14 +31,14 @@ const projectSchema = new mongoose.Schema({
     default: 'active',
   },
   // Payment tracking
-  budget: {
-    type: Number,
-    default: 0,
-  },
   paymentStatus: {
     type: String,
-    enum: ['pending', 'partial', 'paid'],
+    enum: ['pending', 'paid'],
     default: 'pending',
+  },
+  amount: {
+    type: Number,
+    default: 0,
   },
 }, { timestamps: true });
 

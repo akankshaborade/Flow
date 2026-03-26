@@ -5,15 +5,15 @@ const Client = require('../models/Client');
 // @route   POST /api/projects
 const createProject = async (req, res) => {
   try {
-    const { title, description, deadline, status, budget, paymentStatus, client } = req.body;
+    const { title, description, deadline, status, paymentStatus, amount, client } = req.body;
 
-    // Check if the client exists and belongs to the logged-in user
-    const existingClient = await Client.findById(client);
-    if (!existingClient) {
+    // Make sure the client exists and belongs to the logged-in user
+    const clientExists = await Client.findById(client);
+    if (!clientExists) {
       return res.status(404).json({ message: 'Client not found' });
     }
-    if (existingClient.user.toString() !== req.user.id) {
-      return res.status(403).json({ message: 'Not authorized to use this client' });
+    if (clientExists.user.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized' });
     }
 
     const project = await Project.create({
@@ -23,8 +23,8 @@ const createProject = async (req, res) => {
       description,
       deadline,
       status,
-      budget,
       paymentStatus,
+      amount,
     });
 
     res.status(201).json({
@@ -40,8 +40,8 @@ const createProject = async (req, res) => {
 // @route   GET /api/projects
 const getProjects = async (req, res) => {
   try {
-    // populate('client') fills in the full client object instead of just the ID
-    const projects = await Project.find({ user: req.user.id }).populate('client', 'name email company');
+    const projects = await Project.find({ user: req.user.id })
+      .populate('client', 'name email company'); // shows client details inside project
 
     res.status(200).json({
       message: 'Projects fetched successfully',
@@ -76,7 +76,8 @@ const getProjectsByClient = async (req, res) => {
 // @route   GET /api/projects/:id
 const getProjectById = async (req, res) => {
   try {
-    const project = await Project.findById(req.params.id).populate('client', 'name email company');
+    const project = await Project.findById(req.params.id)
+      .populate('client', 'name email company');
 
     if (!project) {
       return res.status(404).json({ message: 'Project not found' });
@@ -86,7 +87,10 @@ const getProjectById = async (req, res) => {
       return res.status(403).json({ message: 'Not authorized' });
     }
 
-    res.status(200).json({ project });
+    res.status(200).json({
+      message: 'Project fetched successfully',
+      project,
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
