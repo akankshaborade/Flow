@@ -1,0 +1,45 @@
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --accent: #6366f1;
+}
+
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--card);
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.main {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.card {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
