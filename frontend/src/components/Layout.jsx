@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg> },
@@ -12,7 +13,7 @@ const navItems = [
 export default function Layout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('flow_user') || '{"name":"Jessica Doe","email":"jessica@example.com"}');
+  const { user } = useAuth();
 
   const handleLogout = () => {
     localStorage.removeItem('flow_token');
