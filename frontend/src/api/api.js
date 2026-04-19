@@ -30,10 +30,26 @@ export const getClients = () => axios.get("/clients");
 // CREATE client
 export const createClient = (data) => axios.post("/clients", data);
 
-// UPDATE client
-export const updateClient = (id, data) =>
-  axios.put(`/clients/${id}`, data);
+// // UPDATE client
+// export const updateClient = (id, data) =>
+//   axios.put(`/clients/${id}`, data);
 
-// DELETE client
-export const deleteClient = (id) =>
-  axios.delete(`/clients/${id}`);
+// // DELETE client
+// export const deleteClient = (id) =>
+//   axios.delete(`/clients/${id}`);
+
+
+// // UPDATE project (Used for changing payment status)
+// export const updateProject = async (id, data) => {
+//   const res = await axios.put(`/projects/${id}`, data);
+//   return res.data;
+// };
+
+
+export const updateClient = (id, data) => axios.put(`/clients/${id}`, data); 
+export const deleteClient = (id) => axios.delete(`/clients/${id}`); 
+
+export const updateProject = async (id, data) => {
+  const res = await axios.put(`/projects/${id}`, data); 
+  return res.data; 
+};

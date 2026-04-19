@@ -119,6 +119,8 @@ html:not(.dark) .user-name {
   --danger: rgba(239, 68, 68, 0.08);
   --danger-border: rgba(239, 68, 68, 0.2);
   --danger-text: #fca5a5;
+  --text: #0f172a;
+  
 }
 
 /* ── Light theme overrides ── */
