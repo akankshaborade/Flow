@@ -1,55 +1,28 @@
 import axios from "./axios";
 
-// Register
-export const registerUser = async (data) => {
-  const res = await axios.post("/auth/register", data);
-  return res.data;
-};
+// ── AUTH ──────────────────────────────────────────────────────────────────────
+export const registerUser = (data) => axios.post("/auth/register", data).then(r => r.data);
+export const loginUser    = (data) => axios.post("/auth/login",    data).then(r => r.data);
 
-// Login
-export const loginUser = async (data) => {
-  const res = await axios.post("/auth/login", data);
-  return res.data;
-};
+// ── DASHBOARD ─────────────────────────────────────────────────────────────────
+export const getDashboard = () => axios.get("/dashboard").then(r => r.data);
 
-// Dashboard
-export const getDashboard = async () => {
-  const res = await axios.get("/dashboard");
-  return res.data;
-};
+// ── CLIENTS ───────────────────────────────────────────────────────────────────
+export const getClients   = ()        => axios.get("/clients").then(r => r.data);
+export const createClient = (data)    => axios.post("/clients", data).then(r => r.data);
+export const updateClient = (id, data)=> axios.put(`/clients/${id}`, data).then(r => r.data);
+export const deleteClient = (id)      => axios.delete(`/clients/${id}`).then(r => r.data);
 
-// Projects
-export const getProjects = async () => {
-  const res = await axios.get("/projects");
-  return res.data;
-};
+// ── PROJECTS ──────────────────────────────────────────────────────────────────
+export const getProjects   = ()        => axios.get("/projects").then(r => r.data);
+export const createProject = (data)    => axios.post("/projects", data).then(r => r.data);
+export const updateProject = (id, data)=> axios.put(`/projects/${id}`, data).then(r => r.data);
+export const deleteProject = (id)      => axios.delete(`/projects/${id}`).then(r => r.data);
 
-// GET all clients
-export const getClients = () => axios.get("/clients");
-
-// CREATE client
-export const createClient = (data) => axios.post("/clients", data);
-
-// // UPDATE client
-// export const updateClient = (id, data) =>
-//   axios.put(`/clients/${id}`, data);
-
-// // DELETE client
-// export const deleteClient = (id) =>
-//   axios.delete(`/clients/${id}`);
-
-
-// // UPDATE project (Used for changing payment status)
-// export const updateProject = async (id, data) => {
-//   const res = await axios.put(`/projects/${id}`, data);
-//   return res.data;
-// };
-
-
-export const updateClient = (id, data) => axios.put(`/clients/${id}`, data); 
-export const deleteClient = (id) => axios.delete(`/clients/${id}`); 
-
-export const updateProject = async (id, data) => {
-  const res = await axios.put(`/projects/${id}`, data); 
-  return res.data; 
-};
+// ── TASKS ─────────────────────────────────────────────────────────────────────
+// Backend expects: { title, dueDate, projectId } — projectId links task to project
+export const getTasksByProject = (projectId) => axios.get(`/tasks/project/${projectId}`).then(r => r.data);
+export const createTask        = (data)       => axios.post("/tasks", data).then(r => r.data);
+export const updateTask        = (id, data)   => axios.put(`/tasks/${id}`, data).then(r => r.data);
+export const deleteTask        = (id)         => axios.delete(`/tasks/${id}`).then(r => r.data);
+export const markTaskComplete  = (id)         => axios.patch(`/tasks/${id}/complete`).then(r => r.data);
