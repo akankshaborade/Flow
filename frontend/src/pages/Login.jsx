@@ -16,27 +16,51 @@ export default function Login() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
-    try {
-      const res = await loginUser(form);
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setError('');
+//     setLoading(true);
+//     try {
+//       const res = await loginUser(form);
 
-console.log("LOGIN RESPONSE:", res.data); // debug
+// console.log("LOGIN RESPONSE:", res.data); // debug
 
-if (res.data.token) {
-  login(res.data.token, res.data.user);
-  navigate('/dashboard');
-} else {
-  setError(res.data.message || 'Invalid credentials');
-}
-    } catch {
-      setError('Network error. Is the server running?');
-    } finally {
-      setLoading(false);
+// if (res.data.token) {
+//   login(res.data.token, res.data.user);
+//   navigate('/dashboard');
+// } else {
+//   setError(res.data.message || 'Invalid credentials');
+// }
+//     } catch {
+//       setError('Network error. Is the server running?');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+
+//changed the handleSubmit - had some errors
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setLoading(true);
+  try {
+    const res = await loginUser(form); 
+    // Since api.js returns res.data, 'res' here IS the data object
+    if (res.token) { 
+      // Context expects (user, token). Parameter order corrected here:
+      login(res.user, res.token); 
+      navigate("/dashboard"); 
+    } else {
+      setError(res.message || 'Invalid credentials'); 
     }
-  };
+  } catch (err) {
+    // Check if it's a real network error or a bad login response
+    setError(err.response?.data?.message || 'Login failed. Check your connection.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="auth-page">

@@ -118,7 +118,7 @@ function StatCard({ label, value, sub, icon, accent }) {
       }} />
       <div style={{ fontSize: 22 }}>{icon}</div>
       <div style={{ fontSize: 26, fontWeight: 800, color: accent, lineHeight: 1.1 }}>{value}</div>
-      <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
+      <div style={{ fontSize: 12, fontWeight: 600, color: 'rgba(86, 81, 167,0.5)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{label}</div>
       {sub && <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginTop: 2 }}>{sub}</div>}
     </div>
   );
@@ -132,7 +132,7 @@ function SectionCard({ title, action, actionTo, children }) {
       borderRadius: 16, padding: '20px 22px',
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
-        <h2 style={{ fontSize: 14, fontWeight: 700, color: '#e0e0f0', margin: 0 }}>{title}</h2>
+        <h2 style={{ fontSize: 14, fontWeight: 700, color: '#5651a7', margin: 0 }}>{title}</h2>
         {action && actionTo && (
           <Link to={actionTo} style={{
             fontSize: 12, color: '#63b4ff', textDecoration: 'none', fontWeight: 600,
@@ -181,7 +181,7 @@ export default function Dashboard() {
 
         {/* Header */}
         <div style={{ marginBottom: 28 }}>
-          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#f0f0ff', margin: 0 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#a78bfa', margin: 0 }}>
             {greeting()}, {user?.name?.split(' ')[0] ?? 'there'} 👋
           </h1>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>
