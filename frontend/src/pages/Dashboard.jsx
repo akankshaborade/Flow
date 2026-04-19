@@ -181,7 +181,7 @@ export default function Dashboard() {
 
         {/* Header */}
         <div style={{ marginBottom: 28 }}>
-          <h1 style={{ fontSize: 24, fontWeight: 800, color: '#a78bfa', margin: 0 }}>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: '  ', margin: 0 }}>
             {greeting()}, {user?.name?.split(' ')[0] ?? 'there'} 👋
           </h1>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginTop: 4 }}>
