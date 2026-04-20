@@ -554,7 +554,7 @@ export default function Settings() {
     name: user?.name || "",
     email: user?.email || "",
     role: "Freelancer",
-    currency: "USD",
+    currency: "INR",
   });
 
   const [saved, setSaved] = useState(false);

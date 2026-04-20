@@ -789,7 +789,7 @@ function useTokens(theme) {
 // ─── Helpers ───────────────────────────────────────────────────────────────────
 
 const fmt = (n) =>
-  "USD " + Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 0 });
+  "₹ " + Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 0 });
 
 const fmtDate = (iso) => {
   if (!iso) return "—";
@@ -1106,7 +1106,7 @@ function AddPaymentModal({ t, theme, clients, onClose, onSaved }) {
           {/* Amount + Status — side by side */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <div>
-              <label style={lbl}>Amount (USD) *</label>
+              <label style={lbl}>Amount (₹) *</label>
               <input
                 type="number" min="1" step="0.01" placeholder="0.00"
                 value={form.amount} onChange={e => set("amount", e.target.value)}
